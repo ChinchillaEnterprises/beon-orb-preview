@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Beon Orb — Animation Preview v1</title>
+<title>Beon Orb — Animation Preview v2</title>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -105,16 +105,117 @@ body {
     margin-top: 4px;
 }
 
-.video-wrap {
-    background: linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.08));
+/* ===== Orb stage ===== */
+.orb-stage {
+    background: linear-gradient(180deg, rgba(0,0,0,0.03), rgba(0,0,0,0.08));
     aspect-ratio: 16 / 9;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    padding: 24px;
 }
-.video-wrap video {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
+
+.orb-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.orb {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 1;
+    user-select: none;
+}
+.orb.default {
+    background: var(--beon-black);
+    color: var(--beon-yellow);
+}
+.orb.active {
+    background: var(--beon-yellow);
+    color: var(--beon-black);
+}
+.orb-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(0,0,0,0.5);
+    font-weight: 500;
+}
+
+/* ===== Option 1: Halo Pulse (5.5s, was 2.2s) ===== */
+.orb.halo::before {
+    content: "";
+    position: absolute;
+    inset: -22px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,239,0,0.55) 0%, rgba(255,239,0,0) 70%);
+    animation: halo-pulse 5.5s ease-in-out infinite;
+    z-index: -1;
+}
+.orb.active.halo::before {
+    background: radial-gradient(circle, rgba(255,239,0,0.75) 0%, rgba(255,239,0,0) 70%);
+}
+@keyframes halo-pulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50%      { opacity: 0.85; transform: scale(1.18); }
+}
+
+/* ===== Option 2: Breathe (6.5s, was 2.6s) ===== */
+.orb.breathe { animation: breathe 6.5s ease-in-out infinite; }
+@keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.08); }
+}
+
+/* ===== Option 3: Rotating Ring (10s, was 4s) ===== */
+.ring-wrap {
+    position: absolute;
+    inset: -14px;
+    animation: spin 10s linear infinite;
+}
+.ring-wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,239,0,0.45);
+}
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--beon-yellow);
+    box-shadow: 0 0 10px rgba(255,239,0,0.85), 0 0 18px rgba(255,239,0,0.45);
+}
+.particle:nth-child(2) { top: -4px; left: 50%; transform: translateX(-50%); }
+.particle:nth-child(3) { bottom: -4px; left: 50%; transform: translateX(-50%); }
+.orb.active .ring-wrap::before { border-color: rgba(0,0,0,0.55); }
+.orb.active .particle {
+    background: var(--beon-black);
+    box-shadow: 0 0 8px rgba(0,0,0,0.6);
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ===== Option 4: State Morph (10s, was 4s) ===== */
+.orb.morph {
+    animation: morph 10s ease-in-out infinite;
+}
+.orb.morph.phase-b { animation-delay: -5s; }
+@keyframes morph {
+    0%, 100% { background: var(--beon-black); color: var(--beon-yellow); }
+    50%      { background: var(--beon-yellow); color: var(--beon-black); }
 }
 
 .option-detail {
@@ -159,6 +260,7 @@ body {
 @media (max-width: 768px) {
     .options-grid { grid-template-columns: 1fr; }
     .title { font-size: 24px; }
+    .orb-stage { gap: 48px; }
 }
 </style>
 </head>
@@ -168,11 +270,11 @@ body {
 
     <div class="header">
         <div class="title">Beon<span>IQ</span> · Beon Orb Animation Preview</div>
-        <div class="subtitle">v1 · Recreated from marketing reference. Four movement options for review.</div>
+        <div class="subtitle">v2 · Speeds slowed across all four options per Marta + Peter feedback. Live CSS animations — what you see here is what will render in the app.</div>
     </div>
 
     <div class="intro-card">
-        Replacing the existing Tuck logo with a new Beon orb per marketing direction. Each video below shows the orb in two states side by side: the <strong>default state</strong> (black orb with yellow letter, used at idle) and the <strong>active state</strong> (yellow orb with black letter, used during interaction or when actively listening). The "b" letterform is approximated with Oswald 500 in this v1 — we will tighten alignment with the official SVG when marketing provides it.
+        Replacing the existing Tuck logo with a new Beon orb per marketing direction. Each card below shows the orb in its two states side by side: the <strong>default state</strong> (black orb with yellow letter, used at idle) and the <strong>active state</strong> (yellow orb with black letter, used during interaction or when actively listening). Animations are now live CSS — speeds in v2 are roughly 2.5x slower than v1 to feel calm rather than urgent. The "b" letterform is approximated with Oswald 500 — we will swap in the official SVG when marketing provides it.
     </div>
 
     <div class="options-grid">
@@ -181,10 +283,17 @@ body {
             <div class="option-header">
                 <div class="option-tag">Option 1</div>
                 <div class="option-title">Halo Pulse</div>
-                <div class="option-summary">Glow alternates intensity at a 2.2 second cycle</div>
+                <div class="option-summary">Yellow halo grows and fades · 5.5 second cycle (was 2.2s)</div>
             </div>
-            <div class="video-wrap">
-                <video src="beon-orb-option1-pulse.mp4" autoplay loop muted playsinline></video>
+            <div class="orb-stage">
+                <div class="orb-cell">
+                    <div class="orb default halo">b</div>
+                    <div class="orb-label">Idle</div>
+                </div>
+                <div class="orb-cell">
+                    <div class="orb active halo">b</div>
+                    <div class="orb-label">Active</div>
+                </div>
             </div>
             <div class="option-detail">
                 Subtle, idle-friendly. The yellow halo grows and fades in a slow rhythm — draws the eye without distracting from content elsewhere on the page. <strong>Suggested use: always-on idle state.</strong>
@@ -195,10 +304,17 @@ body {
             <div class="option-header">
                 <div class="option-tag">Option 2</div>
                 <div class="option-title">Breathe</div>
-                <div class="option-summary">Orb scales 1.0 to 1.12 at a 2.6 second cycle</div>
+                <div class="option-summary">Orb scales 1.0 to 1.08 · 6.5 second cycle (was 2.6s)</div>
             </div>
-            <div class="video-wrap">
-                <video src="beon-orb-option2-breathe.mp4" autoplay loop muted playsinline></video>
+            <div class="orb-stage">
+                <div class="orb-cell">
+                    <div class="orb default breathe">b</div>
+                    <div class="orb-label">Idle</div>
+                </div>
+                <div class="orb-cell">
+                    <div class="orb active breathe">b</div>
+                    <div class="orb-label">Active</div>
+                </div>
             </div>
             <div class="option-detail">
                 Calmer than the halo pulse. Whole orb expands and contracts. Gentler rhythm — reads as "alive but resting." <strong>Suggested use: alternative idle state if pulse feels too active.</strong>
@@ -209,13 +325,32 @@ body {
             <div class="option-header">
                 <div class="option-tag">Option 3</div>
                 <div class="option-title">Rotating Ring</div>
-                <div class="option-summary">4 second rotation with two accent particles</div>
+                <div class="option-summary">Ring rotates with two accent particles · 10 second rotation (was 4s)</div>
             </div>
-            <div class="video-wrap">
-                <video src="beon-orb-option3-ring.mp4" autoplay loop muted playsinline></video>
+            <div class="orb-stage">
+                <div class="orb-cell">
+                    <div class="orb default ring">
+                        <div class="ring-wrap">
+                            <div class="particle"></div>
+                            <div class="particle"></div>
+                        </div>
+                        b
+                    </div>
+                    <div class="orb-label">Idle</div>
+                </div>
+                <div class="orb-cell">
+                    <div class="orb active ring">
+                        <div class="ring-wrap">
+                            <div class="particle"></div>
+                            <div class="particle"></div>
+                        </div>
+                        b
+                    </div>
+                    <div class="orb-label">Active</div>
+                </div>
             </div>
             <div class="option-detail">
-                Most attention-grabbing. Outer ring rotates with two glowing particles orbiting. Reads as "actively working." <strong>Suggested use: "Beon is processing" state — when an Ask Beon query is in flight.</strong>
+                Outer ring rotates slowly with two glowing particles orbiting. Reads as "actively working" without feeling urgent. <strong>Suggested use: "Beon is processing" state — when an Ask Beon query is in flight.</strong>
             </div>
         </div>
 
@@ -223,13 +358,20 @@ body {
             <div class="option-header">
                 <div class="option-tag">Option 4</div>
                 <div class="option-title">State Morph</div>
-                <div class="option-summary">Auto-cycles default ↔ active in a 4 second loop</div>
+                <div class="option-summary">Crossfades default ↔ active · 10 second loop (was 4s)</div>
             </div>
-            <div class="video-wrap">
-                <video src="beon-orb-option4-statemorph.mp4" autoplay loop muted playsinline></video>
+            <div class="orb-stage">
+                <div class="orb-cell">
+                    <div class="orb morph">b</div>
+                    <div class="orb-label">Phase A</div>
+                </div>
+                <div class="orb-cell">
+                    <div class="orb morph phase-b">b</div>
+                    <div class="orb-label">Phase B (offset)</div>
+                </div>
             </div>
             <div class="option-detail">
-                Demonstrates the transition between default and active states. In production this would only fire on hover or interaction, not as a continuous loop. <strong>Suggested use: hover transition between idle and engaged.</strong>
+                Demonstrates the transition between default and active states. The two orbs are offset by 5 seconds so you always see both states represented. In production this would only fire on hover or interaction, not as a continuous loop. <strong>Suggested use: hover transition between idle and engaged.</strong>
             </div>
         </div>
 
@@ -237,14 +379,14 @@ body {
 
     <div class="recommendation">
         <h3>Layered usage recommendation</h3>
-        <p><strong>Idle (always-on):</strong> Option 1 (Halo Pulse) at the front-end speed. Option 2 (Breathe) is an alternative if pulse feels too busy.</p>
+        <p><strong>Idle (always-on):</strong> Option 2 (Breathe) at the v2 speed. Peter preferred Breathe over Pulse for idle in v1 feedback.</p>
         <p><strong>Hover / engaging:</strong> Option 4 (State Morph) but triggered by cursor, not on a loop.</p>
         <p><strong>Active processing:</strong> Option 3 (Rotating Ring) — reserved for "Beon is generating a response." Visible motion communicates work being done.</p>
         <p><strong>Avoid:</strong> stacking all four at once. Pulse plus breathe plus ring is visually busy and competes with surrounding content.</p>
     </div>
 
     <div class="footer">
-        Beon Orb v1 preview · animations recreated in CSS from marketing reference · letter approximated with Oswald 500
+        Beon Orb v2 preview · live CSS animations · v2 speeds: Pulse 5.5s · Breathe 6.5s · Ring 10s · Morph 10s
     </div>
 
 </div>
