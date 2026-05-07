@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Beon Orb — Animation Preview v1.2</title>
+<title>Beon Orb — Animation Preview v1.3</title>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -43,19 +43,9 @@ body {
     margin-bottom: 32px;
     box-shadow: var(--card-shadow);
 }
-.title {
-    font-size: 30px;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-    margin-bottom: 8px;
-}
+.title { font-size: 30px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 8px; }
 .title span { color: var(--beon-yellow); }
-.subtitle {
-    font-size: 15px;
-    color: rgba(255,255,255,0.7);
-    font-weight: 300;
-    line-height: 1.6;
-}
+.subtitle { font-size: 15px; color: rgba(255,255,255,0.7); font-weight: 300; line-height: 1.6; }
 
 .intro-card {
     background: rgba(255,255,255,0.55);
@@ -70,6 +60,146 @@ body {
 }
 .intro-card strong { color: var(--beon-black); font-weight: 600; }
 
+/* ===== Section heading ===== */
+.section-heading {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--beon-teal);
+    margin: 0 4px 16px;
+}
+
+/* ===== "In context" section ===== */
+.context-stack { margin-bottom: 36px; }
+
+.context-card {
+    background: rgba(255,255,255,0.4);
+    backdrop-filter: blur(20px);
+    border-radius: 14px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+.context-card-header { padding: 18px 22px 14px; border-bottom: 1px solid rgba(0,0,0,0.06); }
+
+/* Topbar mock */
+.topbar-mock {
+    background: var(--beon-black);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 22px;
+    height: 64px;
+}
+.topbar-orb {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    position: relative;
+    flex-shrink: 0;
+    background:
+        radial-gradient(circle at 32% 28%, rgba(255,255,255,0.85) 0%, rgba(255,255,180,0.4) 20%, transparent 40%),
+        radial-gradient(circle at 50% 55%, var(--orb-yellow-1) 0%, var(--orb-yellow-2) 70%, #d4b300 100%);
+    animation: halo-pulse-active 4s ease-in-out infinite;
+}
+.topbar-orb .b-letter-mini {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: #000; font-weight: 500; font-size: 22px; line-height: 1; letter-spacing: -0.02em;
+}
+.topbar-wordmark {
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+.topbar-wordmark span { color: var(--beon-yellow); }
+.topbar-spacer { flex: 1; }
+.topbar-pill {
+    color: rgba(255,255,255,0.85);
+    font-size: 12px;
+    font-weight: 400;
+    padding: 6px 12px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+}
+.topbar-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--beon-yellow);
+    color: #000;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600; font-size: 12px;
+    letter-spacing: 0;
+}
+
+/* Hero context grid (2-col) */
+.hero-context-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+.hero-mock {
+    background:
+        radial-gradient(ellipse 600px 300px at 20% 40%, rgba(255, 239, 0, 0.18) 0%, transparent 50%),
+        radial-gradient(ellipse 700px 350px at 80% 30%, rgba(0, 117, 135, 0.14) 0%, transparent 50%),
+        var(--beon-cloud);
+    padding: 28px 24px;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.hero-search {
+    background: rgba(255,255,255,0.6);
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-size: 12px;
+    color: rgba(0,0,0,0.5);
+    box-shadow: var(--card-shadow);
+    flex: 1;
+    min-width: 0;
+}
+.hero-summary {
+    background: rgba(255,255,255,0.55);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 11px;
+    color: rgba(0,0,0,0.7);
+    line-height: 1.4;
+    flex: 1.2;
+    min-width: 0;
+    box-shadow: var(--card-shadow);
+}
+.hero-orb {
+    width: 84px; height: 84px;
+    border-radius: 50%;
+    position: relative;
+    flex-shrink: 0;
+    animation: halo-pulse-default 4s ease-in-out infinite;
+}
+.hero-orb.primary {
+    background:
+        radial-gradient(circle at 32% 28%, rgba(120,120,120,0.55) 0%, rgba(60,60,60,0.2) 18%, transparent 35%),
+        radial-gradient(circle at 50% 50%, var(--orb-black-1) 0%, var(--orb-black-2) 80%);
+}
+.hero-orb.secondary {
+    background:
+        radial-gradient(circle at 32% 28%, rgba(255,255,255,0.85) 0%, rgba(255,255,180,0.4) 20%, transparent 40%),
+        radial-gradient(circle at 50% 55%, var(--orb-yellow-1) 0%, var(--orb-yellow-2) 70%, #d4b300 100%);
+    animation: halo-pulse-active 4s ease-in-out infinite;
+}
+.hero-orb .b-letter-hero {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 500; font-size: 48px; line-height: 1; letter-spacing: -0.02em;
+}
+.hero-orb.primary .b-letter-hero { color: var(--beon-yellow); text-shadow: 0 0 8px rgba(255, 239, 0, 0.4); }
+.hero-orb.secondary .b-letter-hero { color: #000; }
+
+/* ===== Animation grid section ===== */
 .options-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -84,47 +214,25 @@ body {
     box-shadow: var(--card-shadow);
     overflow: hidden;
 }
-
-.option-header {
-    padding: 18px 22px 14px;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-}
+.option-header { padding: 18px 22px 14px; border-bottom: 1px solid rgba(0,0,0,0.06); }
 .option-tag {
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    font-size: 10px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 2px;
     color: var(--beon-teal);
     margin-bottom: 4px;
 }
-.option-title {
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--beon-black);
-    letter-spacing: -0.01em;
-}
-.option-summary {
-    font-size: 13px;
-    color: rgba(0,0,0,0.6);
-    margin-top: 4px;
-}
+.option-title { font-size: 22px; font-weight: 600; color: var(--beon-black); letter-spacing: -0.01em; }
+.option-summary { font-size: 13px; color: rgba(0,0,0,0.6); margin-top: 4px; }
 
-/* ===== Orb stage (replaces video-wrap) ===== */
 .orb-stage {
     background: linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.08));
     aspect-ratio: 16 / 9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     overflow: hidden;
 }
-.orb-row {
-    display: flex;
-    gap: 80px;
-    align-items: center;
-}
+.orb-row { display: flex; gap: 80px; align-items: center; }
 
-/* ===== Shared orb base ===== */
+/* Shared orb base */
 .beon-orb {
     width: 160px; height: 160px;
     border-radius: 50%;
@@ -150,9 +258,9 @@ body {
 .beon-orb.default .b-letter { color: var(--beon-yellow); text-shadow: 0 0 8px rgba(255, 239, 0, 0.4); }
 .beon-orb.active .b-letter { color: #000; }
 
-/* ===== Option 1 — Halo Pulse (5s) ===== */
-.option-1 .beon-orb.default { animation: halo-pulse-default 5s ease-in-out infinite; }
-.option-1 .beon-orb.active { animation: halo-pulse-active 5s ease-in-out infinite; }
+/* Option 1 — Halo Pulse (4s — bumped from 5s per Peter) */
+.option-1 .beon-orb.default { animation: halo-pulse-default 4s ease-in-out infinite; }
+.option-1 .beon-orb.active { animation: halo-pulse-active 4s ease-in-out infinite; }
 @keyframes halo-pulse-default {
     0%, 100% { box-shadow: inset 2px 4px 8px rgba(255,255,255,0.06), inset -2px -3px 8px rgba(0,0,0,0.5), 0 0 0 3px rgba(255, 239, 0, 0.85), 0 0 18px rgba(255, 239, 0, 0.4), 0 0 40px rgba(255, 239, 0, 0.12), 0 8px 20px rgba(0,0,0,0.25); }
     50% { box-shadow: inset 2px 4px 8px rgba(255,255,255,0.06), inset -2px -3px 8px rgba(0,0,0,0.5), 0 0 0 5px rgba(255, 239, 0, 1), 0 0 60px rgba(255, 239, 0, 1), 0 0 120px rgba(255, 239, 0, 0.55), 0 0 200px rgba(255, 239, 0, 0.25), 0 8px 20px rgba(0,0,0,0.25); }
@@ -162,7 +270,7 @@ body {
     50% { box-shadow: inset 2px 4px 10px rgba(255,255,255,0.7), inset -2px -4px 12px rgba(160, 130, 0, 0.4), 0 0 0 5px rgba(0, 0, 0, 0.85), 0 0 80px rgba(255, 239, 0, 1.0), 0 0 180px rgba(255, 239, 0, 0.85), 0 0 280px rgba(255, 239, 0, 0.45), 0 8px 28px rgba(255, 215, 0, 0.6); }
 }
 
-/* ===== Option 2 — Breathe (5s) ===== */
+/* Option 2 — Breathe (5s, unchanged) */
 .option-2 .beon-orb { animation: orb-breathe 5s ease-in-out infinite; }
 .option-2 .beon-orb.default {
     box-shadow: inset 2px 4px 8px rgba(255,255,255,0.06), inset -2px -3px 8px rgba(0,0,0,0.5), 0 0 0 3px rgba(255, 239, 0, 0.95), 0 0 24px rgba(255, 239, 0, 0.55), 0 0 56px rgba(255, 239, 0, 0.18), 0 8px 20px rgba(0,0,0,0.25);
@@ -172,7 +280,7 @@ body {
 }
 @keyframes orb-breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
 
-/* ===== Option 3 — Rotating Ring (10s) ===== */
+/* Option 3 — Rotating Ring (10s, unchanged) */
 .option-3 .with-ring {
     position: relative;
     width: 220px; height: 220px;
@@ -207,7 +315,7 @@ body {
 }
 @keyframes ring-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-/* ===== Option 4 — State Morph (10s) ===== */
+/* Option 4 — State Morph (10s, unchanged) */
 .option-4 .morph-orb {
     width: 180px; height: 180px;
     border-radius: 50%; position: relative;
@@ -254,19 +362,12 @@ body {
     margin-bottom: 24px;
 }
 .recommendation h3 {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 2px;
     color: var(--beon-teal);
     margin-bottom: 12px;
 }
-.recommendation p {
-    font-size: 14px;
-    line-height: 1.65;
-    color: rgba(0,0,0,0.78);
-    margin-bottom: 8px;
-}
+.recommendation p { font-size: 14px; line-height: 1.65; color: rgba(0,0,0,0.78); margin-bottom: 8px; }
 .recommendation p strong { color: var(--beon-black); font-weight: 600; }
 
 .footer {
@@ -278,7 +379,7 @@ body {
 }
 
 @media (max-width: 768px) {
-    .options-grid { grid-template-columns: 1fr; }
+    .options-grid, .hero-context-grid { grid-template-columns: 1fr; }
     .title { font-size: 24px; }
     .orb-row { gap: 40px; }
     .beon-orb { width: 120px; height: 120px; }
@@ -286,6 +387,8 @@ body {
     .option-3 .with-ring { width: 170px; height: 170px; }
     .option-4 .morph-orb { width: 140px; height: 140px; }
     .option-4 .morph-orb .b-letter { font-size: 80px; }
+    .hero-mock { flex-wrap: wrap; }
+    .hero-orb { margin: 0 auto; }
 }
 </style>
 </head>
@@ -295,12 +398,73 @@ body {
 
     <div class="header">
         <div class="title">Beon<span>IQ</span> · Beon Orb Animation Preview</div>
-        <div class="subtitle">v1.2 · Same v1 designs, animations now run live in the browser at true CSS speed (no MP4 timing artifacts). Pulse 5s · Breathe 5s · Ring 10s · Morph 10s.</div>
+        <div class="subtitle">v1.3 · Yellow chosen as primary brand direction. Pulse bumped to 4s. New "in context" section shows the orb on the actual app surfaces — yellow body on the black topbar, black body with yellow letter on the light hero. Plus a yellow-on-light secondary for compare/reject.</div>
     </div>
 
     <div class="intro-card">
-        Replacing the existing Tuck logo with a new Beon orb per marketing direction. Each card below shows the orb in two states side by side: the <strong>default state</strong> (black orb with yellow letter, used at idle) and the <strong>active state</strong> (yellow orb with black letter, used during interaction or when actively listening). The "b" letterform is approximated with Oswald 500 — we will tighten alignment with the official SVG when marketing provides it.
+        Replacing the existing Tuck logo with a new Beon orb per marketing direction. The animation grid below shows the four movement options on a neutral surface; the new "In context" section above it shows how the orb will actually sit in the BeonIQ app — topbar (black) and hero (light cloud). The "b" letterform is approximated with Oswald 500 — we will tighten alignment with the official SVG when marketing provides it.
     </div>
+
+    <!-- ===== IN CONTEXT ===== -->
+    <div class="context-stack">
+        <div class="section-heading">In context — how the orb sits on the actual app surfaces</div>
+
+        <div class="context-card">
+            <div class="context-card-header">
+                <div class="option-tag">Topbar — primary placement</div>
+                <div class="option-title">Yellow body on black surface</div>
+                <div class="option-summary">Halo pulse 4s · clean contrast · settled direction</div>
+            </div>
+            <div class="topbar-mock">
+                <div class="topbar-orb"><div class="b-letter-mini">b</div></div>
+                <div class="topbar-wordmark">Beon<span>IQ</span></div>
+                <div class="topbar-spacer"></div>
+                <div class="topbar-pill">MALARKEY</div>
+                <div class="topbar-pill">Director · LTL · Inbound</div>
+                <div class="topbar-avatar">MB</div>
+            </div>
+            <div class="option-detail">
+                Yellow orb body with black "b" letter on the black topbar surface. Reads as the brand mark you'd see on every page. <strong>Halo pulse runs at 4s</strong> per Peter's "just a bit faster" note.
+            </div>
+        </div>
+
+        <div class="hero-context-grid">
+            <div class="context-card">
+                <div class="context-card-header">
+                    <div class="option-tag">Hero — primary (recommended)</div>
+                    <div class="option-title">Black body, yellow letter</div>
+                    <div class="option-summary">Halo pulse 4s · keeps yellow brand presence via the letter</div>
+                </div>
+                <div class="hero-mock">
+                    <div class="hero-search">Ask Beon anything…</div>
+                    <div class="hero-summary">Performance summary — flat week-over-week, $835K vs $836K. Volume tracking 39% of recent average.</div>
+                    <div class="hero-orb primary"><div class="b-letter-hero">b</div></div>
+                </div>
+                <div class="option-detail">
+                    On the light cloud surface, a black body keeps the orb visible without the white-on-yellow contrast issue. The yellow "b" preserves the brand connection.
+                </div>
+            </div>
+
+            <div class="context-card">
+                <div class="context-card-header">
+                    <div class="option-tag">Hero — secondary (compare / reject)</div>
+                    <div class="option-title">Yellow body on light surface</div>
+                    <div class="option-summary">Same surface, yellow body — for direct comparison</div>
+                </div>
+                <div class="hero-mock">
+                    <div class="hero-search">Ask Beon anything…</div>
+                    <div class="hero-summary">Performance summary — flat week-over-week, $835K vs $836K. Volume tracking 39% of recent average.</div>
+                    <div class="hero-orb secondary"><div class="b-letter-hero">b</div></div>
+                </div>
+                <div class="option-detail">
+                    Same hero context, yellow body for side-by-side comparison. Contrast against the cloud background tends to read hot — included so the call between primary and secondary is direct.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ANIMATION GRID ===== -->
+    <div class="section-heading">Animation movement options (reference)</div>
 
     <div class="options-grid">
 
@@ -308,7 +472,7 @@ body {
             <div class="option-header">
                 <div class="option-tag">Option 1</div>
                 <div class="option-title">Halo Pulse</div>
-                <div class="option-summary">Yellow halo grows and fades · 5 second cycle</div>
+                <div class="option-summary">Yellow halo grows and fades · 4 second cycle (was 5s in v1.2)</div>
             </div>
             <div class="orb-stage">
                 <div class="orb-row">
@@ -379,14 +543,14 @@ body {
 
     <div class="recommendation">
         <h3>Layered usage recommendation</h3>
-        <p><strong>Idle (always-on):</strong> Option 2 (Breathe) per Peter's preference, or Option 1 (Halo Pulse) as alternative.</p>
-        <p><strong>Hover / engaging:</strong> Option 4 (State Morph) but triggered by cursor, not on a loop.</p>
-        <p><strong>Active processing:</strong> Option 3 (Rotating Ring) — reserved for "Beon is generating a response." Visible motion communicates work being done.</p>
-        <p><strong>Avoid:</strong> stacking all four at once. Pulse plus breathe plus ring is visually busy and competes with surrounding content.</p>
+        <p><strong>Topbar (black surface):</strong> yellow orb body with black "b" letter, halo pulse 4s — settled per Peter + Marta + Jamie.</p>
+        <p><strong>Hero (light surface):</strong> black orb body with yellow letter, halo pulse 4s — primary recommendation. Yellow body on light is included for direct compare/reject only.</p>
+        <p><strong>Active processing:</strong> Option 3 (Rotating Ring) — reserved for "Beon is generating a response."</p>
+        <p><strong>Avoid:</strong> stacking all four animations at once. Pulse is the idle baseline; ring is the "working" signal; morph is reserved for interactive transitions.</p>
     </div>
 
     <div class="footer">
-        Beon Orb v1.2 preview · live CSS animations · letter approximated with Oswald 500
+        Beon Orb v1.3 preview · live CSS animations · letter approximated with Oswald 500
     </div>
 
 </div>
