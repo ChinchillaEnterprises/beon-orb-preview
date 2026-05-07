@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Beon Orb — Animation Preview v1</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --beon-yellow: #FFEF00;
+    --beon-cloud: #F1F4FA;
+    --beon-teal: #007587;
+    --beon-black: #000;
+    --card-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.05);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Oswald', sans-serif;
+    color: var(--beon-black);
+    -webkit-font-smoothing: antialiased;
+    background:
+        radial-gradient(ellipse 800px 400px at 20% 40%, rgba(255, 239, 0, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 900px 450px at 80% 30%, rgba(0, 117, 135, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 700px 500px at 50% 60%, rgba(255, 239, 0, 0.18) 0%, transparent 50%),
+        var(--beon-cloud);
+    min-height: 100vh;
+    padding: 48px 24px 64px;
+    line-height: 1.5;
+}
+
+.container { max-width: 1180px; margin: 0 auto; }
+
+.header {
+    background: var(--beon-black);
+    color: white;
+    padding: 24px 32px;
+    border-radius: 14px;
+    margin-bottom: 32px;
+    box-shadow: var(--card-shadow);
+}
+.title {
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+}
+.title span { color: var(--beon-yellow); }
+.subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+.intro-card {
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(20px);
+    border-radius: 14px;
+    box-shadow: var(--card-shadow);
+    padding: 24px 28px;
+    margin-bottom: 32px;
+    font-size: 15px;
+    line-height: 1.65;
+    color: rgba(0,0,0,0.78);
+}
+.intro-card strong { color: var(--beon-black); font-weight: 600; }
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-bottom: 32px;
+}
+
+.option-card {
+    background: rgba(255,255,255,0.4);
+    backdrop-filter: blur(20px);
+    border-radius: 14px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+
+.option-header {
+    padding: 18px 22px 14px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.option-tag {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--beon-teal);
+    margin-bottom: 4px;
+}
+.option-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--beon-black);
+    letter-spacing: -0.01em;
+}
+.option-summary {
+    font-size: 13px;
+    color: rgba(0,0,0,0.6);
+    margin-top: 4px;
+}
+
+.video-wrap {
+    background: linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.08));
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+}
+.video-wrap video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.option-detail {
+    padding: 14px 22px 18px;
+    font-size: 13px;
+    color: rgba(0,0,0,0.7);
+    line-height: 1.6;
+}
+.option-detail strong { color: var(--beon-black); font-weight: 600; }
+
+.recommendation {
+    background: rgba(0, 117, 135, 0.06);
+    border: 1px solid rgba(0, 117, 135, 0.18);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+}
+.recommendation h3 {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--beon-teal);
+    margin-bottom: 12px;
+}
+.recommendation p {
+    font-size: 14px;
+    line-height: 1.65;
+    color: rgba(0,0,0,0.78);
+    margin-bottom: 8px;
+}
+.recommendation p strong { color: var(--beon-black); font-weight: 600; }
+
+.footer {
+    text-align: center;
+    margin-top: 48px;
+    font-size: 12px;
+    color: rgba(0,0,0,0.45);
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .options-grid { grid-template-columns: 1fr; }
+    .title { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="title">Beon<span>IQ</span> · Beon Orb Animation Preview</div>
+        <div class="subtitle">v1 · Recreated from marketing reference. Four movement options for review.</div>
+    </div>
+
+    <div class="intro-card">
+        Replacing the existing Tuck logo with a new Beon orb per marketing direction. Each video below shows the orb in two states side by side: the <strong>default state</strong> (black orb with yellow letter, used at idle) and the <strong>active state</strong> (yellow orb with black letter, used during interaction or when actively listening). The "b" letterform is approximated with Oswald 500 in this v1 — we will tighten alignment with the official SVG when marketing provides it.
+    </div>
+
+    <div class="options-grid">
+
+        <div class="option-card">
+            <div class="option-header">
+                <div class="option-tag">Option 1</div>
+                <div class="option-title">Halo Pulse</div>
+                <div class="option-summary">Glow alternates intensity at a 2.2 second cycle</div>
+            </div>
+            <div class="video-wrap">
+                <video src="beon-orb-option1-pulse.mp4" autoplay loop muted playsinline></video>
+            </div>
+            <div class="option-detail">
+                Subtle, idle-friendly. The yellow halo grows and fades in a slow rhythm — draws the eye without distracting from content elsewhere on the page. <strong>Suggested use: always-on idle state.</strong>
+            </div>
+        </div>
+
+        <div class="option-card">
+            <div class="option-header">
+                <div class="option-tag">Option 2</div>
+                <div class="option-title">Breathe</div>
+                <div class="option-summary">Orb scales 1.0 to 1.12 at a 2.6 second cycle</div>
+            </div>
+            <div class="video-wrap">
+                <video src="beon-orb-option2-breathe.mp4" autoplay loop muted playsinline></video>
+            </div>
+            <div class="option-detail">
+                Calmer than the halo pulse. Whole orb expands and contracts. Gentler rhythm — reads as "alive but resting." <strong>Suggested use: alternative idle state if pulse feels too active.</strong>
+            </div>
+        </div>
+
+        <div class="option-card">
+            <div class="option-header">
+                <div class="option-tag">Option 3</div>
+                <div class="option-title">Rotating Ring</div>
+                <div class="option-summary">4 second rotation with two accent particles</div>
+            </div>
+            <div class="video-wrap">
+                <video src="beon-orb-option3-ring.mp4" autoplay loop muted playsinline></video>
+            </div>
+            <div class="option-detail">
+                Most attention-grabbing. Outer ring rotates with two glowing particles orbiting. Reads as "actively working." <strong>Suggested use: "Beon is processing" state — when an Ask Beon query is in flight.</strong>
+            </div>
+        </div>
+
+        <div class="option-card">
+            <div class="option-header">
+                <div class="option-tag">Option 4</div>
+                <div class="option-title">State Morph</div>
+                <div class="option-summary">Auto-cycles default ↔ active in a 4 second loop</div>
+            </div>
+            <div class="video-wrap">
+                <video src="beon-orb-option4-statemorph.mp4" autoplay loop muted playsinline></video>
+            </div>
+            <div class="option-detail">
+                Demonstrates the transition between default and active states. In production this would only fire on hover or interaction, not as a continuous loop. <strong>Suggested use: hover transition between idle and engaged.</strong>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="recommendation">
+        <h3>Layered usage recommendation</h3>
+        <p><strong>Idle (always-on):</strong> Option 1 (Halo Pulse) at the front-end speed. Option 2 (Breathe) is an alternative if pulse feels too busy.</p>
+        <p><strong>Hover / engaging:</strong> Option 4 (State Morph) but triggered by cursor, not on a loop.</p>
+        <p><strong>Active processing:</strong> Option 3 (Rotating Ring) — reserved for "Beon is generating a response." Visible motion communicates work being done.</p>
+        <p><strong>Avoid:</strong> stacking all four at once. Pulse plus breathe plus ring is visually busy and competes with surrounding content.</p>
+    </div>
+
+    <div class="footer">
+        Beon Orb v1 preview · animations recreated in CSS from marketing reference · letter approximated with Oswald 500
+    </div>
+
+</div>
+
+</body>
+</html>
