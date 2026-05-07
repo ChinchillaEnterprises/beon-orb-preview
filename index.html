@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Beon Orb — Animation Preview v1</title>
+<title>Beon Orb — Animation Preview v1.2</title>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -12,6 +12,10 @@
     --beon-cloud: #F1F4FA;
     --beon-teal: #007587;
     --beon-black: #000;
+    --orb-black-1: #1a1a1a;
+    --orb-black-2: #000000;
+    --orb-yellow-1: #FFF35C;
+    --orb-yellow-2: #FFD500;
     --card-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.05);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -105,16 +109,133 @@ body {
     margin-top: 4px;
 }
 
-.video-wrap {
+/* ===== Orb stage (replaces video-wrap) ===== */
+.orb-stage {
     background: linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.08));
     aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
 }
-.video-wrap video {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
+.orb-row {
+    display: flex;
+    gap: 80px;
+    align-items: center;
+}
+
+/* ===== Shared orb base ===== */
+.beon-orb {
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    position: relative;
+}
+.beon-orb.default {
+    background:
+        radial-gradient(circle at 32% 28%, rgba(120,120,120,0.55) 0%, rgba(60,60,60,0.2) 18%, transparent 35%),
+        radial-gradient(circle at 50% 50%, var(--orb-black-1) 0%, var(--orb-black-2) 80%);
+}
+.beon-orb.active {
+    background:
+        radial-gradient(circle at 32% 28%, rgba(255,255,255,0.85) 0%, rgba(255,255,180,0.4) 20%, transparent 40%),
+        radial-gradient(circle at 50% 55%, var(--orb-yellow-1) 0%, var(--orb-yellow-2) 70%, #d4b300 100%);
+}
+.b-letter {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 90px; line-height: 1; letter-spacing: -0.02em;
+    user-select: none;
+}
+.beon-orb.default .b-letter { color: var(--beon-yellow); text-shadow: 0 0 8px rgba(255, 239, 0, 0.4); }
+.beon-orb.active .b-letter { color: #000; }
+
+/* ===== Option 1 — Halo Pulse (5s) ===== */
+.option-1 .beon-orb.default { animation: halo-pulse-default 5s ease-in-out infinite; }
+.option-1 .beon-orb.active { animation: halo-pulse-active 5s ease-in-out infinite; }
+@keyframes halo-pulse-default {
+    0%, 100% { box-shadow: inset 2px 4px 8px rgba(255,255,255,0.06), inset -2px -3px 8px rgba(0,0,0,0.5), 0 0 0 3px rgba(255, 239, 0, 0.85), 0 0 18px rgba(255, 239, 0, 0.4), 0 0 40px rgba(255, 239, 0, 0.12), 0 8px 20px rgba(0,0,0,0.25); }
+    50% { box-shadow: inset 2px 4px 8px rgba(255,255,255,0.06), inset -2px -3px 8px rgba(0,0,0,0.5), 0 0 0 5px rgba(255, 239, 0, 1), 0 0 60px rgba(255, 239, 0, 1), 0 0 120px rgba(255, 239, 0, 0.55), 0 0 200px rgba(255, 239, 0, 0.25), 0 8px 20px rgba(0,0,0,0.25); }
+}
+@keyframes halo-pulse-active {
+    0%, 100% { box-shadow: inset 2px 4px 10px rgba(255,255,255,0.7), inset -2px -4px 12px rgba(160, 130, 0, 0.4), 0 0 0 3px rgba(0, 0, 0, 0.85), 0 0 24px rgba(255, 239, 0, 0.7), 0 0 60px rgba(255, 239, 0, 0.3), 0 0 110px rgba(255, 239, 0, 0.12), 0 8px 24px rgba(255, 215, 0, 0.4); }
+    50% { box-shadow: inset 2px 4px 10px rgba(255,255,255,0.7), inset -2px -4px 12px rgba(160, 130, 0, 0.4), 0 0 0 5px rgba(0, 0, 0, 0.85), 0 0 80px rgba(255, 239, 0, 1.0), 0 0 180px rgba(255, 239, 0, 0.85), 0 0 280px rgba(255, 239, 0, 0.45), 0 8px 28px rgba(255, 215, 0, 0.6); }
+}
+
+/* ===== Option 2 — Breathe (5s) ===== */
+.option-2 .beon-orb { animation: orb-breathe 5s ease-in-out infinite; }
+.option-2 .beon-orb.default {
+    box-shadow: inset 2px 4px 8px rgba(255,255,255,0.06), inset -2px -3px 8px rgba(0,0,0,0.5), 0 0 0 3px rgba(255, 239, 0, 0.95), 0 0 24px rgba(255, 239, 0, 0.55), 0 0 56px rgba(255, 239, 0, 0.18), 0 8px 20px rgba(0,0,0,0.25);
+}
+.option-2 .beon-orb.active {
+    box-shadow: inset 2px 4px 10px rgba(255,255,255,0.7), inset -2px -4px 12px rgba(160, 130, 0, 0.4), 0 0 0 3px rgba(0, 0, 0, 0.85), 0 0 30px rgba(255, 239, 0, 0.85), 0 0 80px rgba(255, 239, 0, 0.4), 0 0 140px rgba(255, 239, 0, 0.18), 0 8px 24px rgba(255, 215, 0, 0.4);
+}
+@keyframes orb-breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+
+/* ===== Option 3 — Rotating Ring (10s) ===== */
+.option-3 .with-ring {
+    position: relative;
+    width: 220px; height: 220px;
+    display: flex; align-items: center; justify-content: center;
+}
+.option-3 .outer-ring {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 239, 0, 0.7);
+    box-shadow: 0 0 22px rgba(255, 239, 0, 0.5), inset 0 0 14px rgba(255, 239, 0, 0.25);
+    animation: ring-rotate 10s linear infinite;
+}
+.option-3 .outer-ring::before {
+    content: ''; position: absolute;
+    width: 18px; height: 18px;
+    background: var(--beon-yellow); border-radius: 50%;
+    top: -9px; left: 50%; transform: translateX(-50%);
+    box-shadow: 0 0 14px rgba(255, 239, 0, 1), 0 0 28px rgba(255, 239, 0, 0.6);
+}
+.option-3 .outer-ring::after {
+    content: ''; position: absolute;
+    width: 10px; height: 10px;
+    background: rgba(255, 239, 0, 0.85); border-radius: 50%;
+    bottom: -5px; left: 50%; transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(255, 239, 0, 0.7);
+}
+.option-3 .beon-orb.default {
+    box-shadow: inset 2px 4px 8px rgba(255,255,255,0.06), inset -2px -3px 8px rgba(0,0,0,0.5), 0 0 0 3px rgba(255, 239, 0, 0.95), 0 0 24px rgba(255, 239, 0, 0.55), 0 8px 20px rgba(0,0,0,0.25);
+}
+.option-3 .beon-orb.active {
+    box-shadow: inset 2px 4px 10px rgba(255,255,255,0.7), inset -2px -4px 12px rgba(160, 130, 0, 0.4), 0 0 0 3px rgba(0, 0, 0, 0.85), 0 0 30px rgba(255, 239, 0, 0.85), 0 0 80px rgba(255, 239, 0, 0.4), 0 8px 24px rgba(255, 215, 0, 0.4);
+}
+@keyframes ring-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* ===== Option 4 — State Morph (10s) ===== */
+.option-4 .morph-orb {
+    width: 180px; height: 180px;
+    border-radius: 50%; position: relative;
+    animation: state-morph 10s ease-in-out infinite;
+}
+.option-4 .morph-orb .b-letter {
+    font-size: 100px;
+    animation: letter-morph 10s ease-in-out infinite;
+}
+@keyframes state-morph {
+    0%, 45% {
+        background:
+            radial-gradient(circle at 32% 28%, rgba(120,120,120,0.55) 0%, rgba(60,60,60,0.2) 18%, transparent 35%),
+            radial-gradient(circle at 50% 50%, var(--orb-black-1) 0%, var(--orb-black-2) 80%);
+        box-shadow: inset 2px 4px 8px rgba(255,255,255,0.06), inset -2px -3px 8px rgba(0,0,0,0.5), 0 0 0 3px rgba(255, 239, 0, 0.95), 0 0 24px rgba(255, 239, 0, 0.55), 0 0 56px rgba(255, 239, 0, 0.18), 0 8px 20px rgba(0,0,0,0.25);
+        transform: scale(1);
+    }
+    55%, 95% {
+        background:
+            radial-gradient(circle at 32% 28%, rgba(255,255,255,0.85) 0%, rgba(255,255,180,0.4) 20%, transparent 40%),
+            radial-gradient(circle at 50% 55%, var(--orb-yellow-1) 0%, var(--orb-yellow-2) 70%, #d4b300 100%);
+        box-shadow: inset 2px 4px 10px rgba(255,255,255,0.7), inset -2px -4px 12px rgba(160, 130, 0, 0.4), 0 0 0 3px rgba(0, 0, 0, 0.85), 0 0 50px rgba(255, 239, 0, 0.95), 0 0 120px rgba(255, 239, 0, 0.55), 0 0 220px rgba(255, 239, 0, 0.25), 0 8px 28px rgba(255, 215, 0, 0.5);
+        transform: scale(1.06);
+    }
+}
+@keyframes letter-morph {
+    0%, 45% { color: var(--beon-yellow); text-shadow: 0 0 8px rgba(255, 239, 0, 0.4); }
+    55%, 95% { color: #000; text-shadow: none; }
 }
 
 .option-detail {
@@ -159,6 +280,12 @@ body {
 @media (max-width: 768px) {
     .options-grid { grid-template-columns: 1fr; }
     .title { font-size: 24px; }
+    .orb-row { gap: 40px; }
+    .beon-orb { width: 120px; height: 120px; }
+    .b-letter { font-size: 68px; }
+    .option-3 .with-ring { width: 170px; height: 170px; }
+    .option-4 .morph-orb { width: 140px; height: 140px; }
+    .option-4 .morph-orb .b-letter { font-size: 80px; }
 }
 </style>
 </head>
@@ -168,65 +295,80 @@ body {
 
     <div class="header">
         <div class="title">Beon<span>IQ</span> · Beon Orb Animation Preview</div>
-        <div class="subtitle">v1.1 · Same designs, slower speeds per Marta + Peter feedback. Pulse 5s · Breathe 5s · Ring 10s · Morph 10s.</div>
+        <div class="subtitle">v1.2 · Same v1 designs, animations now run live in the browser at true CSS speed (no MP4 timing artifacts). Pulse 5s · Breathe 5s · Ring 10s · Morph 10s.</div>
     </div>
 
     <div class="intro-card">
-        Replacing the existing Tuck logo with a new Beon orb per marketing direction. Each video below shows the orb in two states side by side: the <strong>default state</strong> (black orb with yellow letter, used at idle) and the <strong>active state</strong> (yellow orb with black letter, used during interaction or when actively listening). The "b" letterform is approximated with Oswald 500 in this v1 — we will tighten alignment with the official SVG when marketing provides it.
+        Replacing the existing Tuck logo with a new Beon orb per marketing direction. Each card below shows the orb in two states side by side: the <strong>default state</strong> (black orb with yellow letter, used at idle) and the <strong>active state</strong> (yellow orb with black letter, used during interaction or when actively listening). The "b" letterform is approximated with Oswald 500 — we will tighten alignment with the official SVG when marketing provides it.
     </div>
 
     <div class="options-grid">
 
-        <div class="option-card">
+        <div class="option-card option-1">
             <div class="option-header">
                 <div class="option-tag">Option 1</div>
                 <div class="option-title">Halo Pulse</div>
-                <div class="option-summary">Glow alternates intensity at a 5.0 second cycle</div>
+                <div class="option-summary">Yellow halo grows and fades · 5 second cycle</div>
             </div>
-            <div class="video-wrap">
-                <video src="beon-orb-option1-pulse.mp4" autoplay loop muted playsinline></video>
+            <div class="orb-stage">
+                <div class="orb-row">
+                    <div class="beon-orb default"><div class="b-letter">b</div></div>
+                    <div class="beon-orb active"><div class="b-letter">b</div></div>
+                </div>
             </div>
             <div class="option-detail">
                 Subtle, idle-friendly. The yellow halo grows and fades in a slow rhythm — draws the eye without distracting from content elsewhere on the page. <strong>Suggested use: always-on idle state.</strong>
             </div>
         </div>
 
-        <div class="option-card">
+        <div class="option-card option-2">
             <div class="option-header">
                 <div class="option-tag">Option 2</div>
                 <div class="option-title">Breathe</div>
-                <div class="option-summary">Orb scales 1.0 to 1.12 at a 5.0 second cycle</div>
+                <div class="option-summary">Orb scales 1.0 to 1.12 · 5 second cycle</div>
             </div>
-            <div class="video-wrap">
-                <video src="beon-orb-option2-breathe.mp4" autoplay loop muted playsinline></video>
+            <div class="orb-stage">
+                <div class="orb-row">
+                    <div class="beon-orb default"><div class="b-letter">b</div></div>
+                    <div class="beon-orb active"><div class="b-letter">b</div></div>
+                </div>
             </div>
             <div class="option-detail">
                 Calmer than the halo pulse. Whole orb expands and contracts. Gentler rhythm — reads as "alive but resting." <strong>Suggested use: alternative idle state if pulse feels too active.</strong>
             </div>
         </div>
 
-        <div class="option-card">
+        <div class="option-card option-3">
             <div class="option-header">
                 <div class="option-tag">Option 3</div>
                 <div class="option-title">Rotating Ring</div>
-                <div class="option-summary">10 second rotation with two accent particles</div>
+                <div class="option-summary">Ring rotates with two accent particles · 10 second rotation</div>
             </div>
-            <div class="video-wrap">
-                <video src="beon-orb-option3-ring.mp4" autoplay loop muted playsinline></video>
+            <div class="orb-stage">
+                <div class="orb-row">
+                    <div class="with-ring">
+                        <div class="outer-ring"></div>
+                        <div class="beon-orb default"><div class="b-letter">b</div></div>
+                    </div>
+                    <div class="with-ring">
+                        <div class="outer-ring"></div>
+                        <div class="beon-orb active"><div class="b-letter">b</div></div>
+                    </div>
+                </div>
             </div>
             <div class="option-detail">
                 Most attention-grabbing. Outer ring rotates with two glowing particles orbiting. Reads as "actively working." <strong>Suggested use: "Beon is processing" state — when an Ask Beon query is in flight.</strong>
             </div>
         </div>
 
-        <div class="option-card">
+        <div class="option-card option-4">
             <div class="option-header">
                 <div class="option-tag">Option 4</div>
                 <div class="option-title">State Morph</div>
-                <div class="option-summary">Auto-cycles default ↔ active in a 10 second loop</div>
+                <div class="option-summary">Auto-cycles default ↔ active · 10 second loop</div>
             </div>
-            <div class="video-wrap">
-                <video src="beon-orb-option4-statemorph.mp4" autoplay loop muted playsinline></video>
+            <div class="orb-stage">
+                <div class="morph-orb"><div class="b-letter">b</div></div>
             </div>
             <div class="option-detail">
                 Demonstrates the transition between default and active states. In production this would only fire on hover or interaction, not as a continuous loop. <strong>Suggested use: hover transition between idle and engaged.</strong>
@@ -237,14 +379,14 @@ body {
 
     <div class="recommendation">
         <h3>Layered usage recommendation</h3>
-        <p><strong>Idle (always-on):</strong> Option 1 (Halo Pulse) at the front-end speed. Option 2 (Breathe) is an alternative if pulse feels too busy.</p>
+        <p><strong>Idle (always-on):</strong> Option 2 (Breathe) per Peter's preference, or Option 1 (Halo Pulse) as alternative.</p>
         <p><strong>Hover / engaging:</strong> Option 4 (State Morph) but triggered by cursor, not on a loop.</p>
         <p><strong>Active processing:</strong> Option 3 (Rotating Ring) — reserved for "Beon is generating a response." Visible motion communicates work being done.</p>
         <p><strong>Avoid:</strong> stacking all four at once. Pulse plus breathe plus ring is visually busy and competes with surrounding content.</p>
     </div>
 
     <div class="footer">
-        Beon Orb v1 preview · animations recreated in CSS from marketing reference · letter approximated with Oswald 500
+        Beon Orb v1.2 preview · live CSS animations · letter approximated with Oswald 500
     </div>
 
 </div>
